@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boxing Round Interval Timer</title>
+  <!-- Bootstrap 5 CSS from CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container py-4">
+    <!-- Header -->
+    <header class="text-center mb-4">
+      <h1>Boxing Round Interval Timer</h1>
+      <p class="lead">Configure your workout rounds, rest periods, and start training!</p>
+    </header>
+    
+    <!-- Main Timer Display -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h2 id="timer-display" class="display-1 mb-3">03:00</h2>
+            <p id="round-display" class="h4">Round 0/12</p>
+            <p id="state-display" class="h5">READY</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Control Buttons -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="d-flex justify-content-center flex-wrap gap-2">
+          <button id="start-btn" class="btn btn-success btn-lg">Start</button>
+          <button id="stop-btn" class="btn btn-warning btn-lg">Stop</button>
+          <button id="reset-btn" class="btn btn-danger btn-lg">Reset</button>
+          <button id="settings-btn" class="btn btn-info btn-lg">Settings</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Instructions (new section) -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="alert alert-secondary">
+          <h4>Instructions:</h4>
+          <ul>
+            <li><strong>Start:</strong> Begin the timer</li>
+            <li><strong>Stop:</strong> Pause the timer</li>
+            <li><strong>Reset:</strong> Reset to the beginning</li>
+            <li><strong>Settings:</strong> Configure round time, rest time, and number of rounds</li>
+          </ul>
+          <p class="small mb-0">Default settings: 3-minute rounds, 1-minute rest, 12 rounds total</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Animation Area -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="text-center">
+          <img id="animation" src="https://media3.giphy.com/media/39BdMOJMK2YVqktnlS/giphy.gif" alt="Boxing Animation" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Settings Panel (Hidden by default) -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div id="settings-panel" class="card shadow d-none">
+          <div class="card-header bg-info text-white">
+            <h2 class="card-title mb-0">Settings</h2>
+          </div>
+          <div class="card-body">
+            <form id="settings-form">
+              <!-- Round Time -->
+              <div class="mb-3 row">
+                <label for="round-minutes" class="col-sm-4 col-form-label">Round Time:</label>
+                <div class="col-sm-4">
+                  <input type="number" id="round-minutes" class="form-control" min="0" max="10" value="3">
+                  <label for="round-minutes" class="form-text">Minutes</label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="number" id="round-seconds" class="form-control" min="0" max="59" value="0">
+                  <label for="round-seconds" class="form-text">Seconds</label>
+                </div>
+              </div>
+              
+              <!-- Rest Time -->
+              <div class="mb-3 row">
+                <label for="rest-minutes" class="col-sm-4 col-form-label">Rest Time:</label>
+                <div class="col-sm-4">
+                  <input type="number" id="rest-minutes" class="form-control" min="0" max="10" value="1">
+                  <label for="rest-minutes" class="form-text">Minutes</label>
+                </div>
+                <div class="col-sm-4">
+                  <input type="number" id="rest-seconds" class="form-control" min="0" max="59" value="0">
+                  <label for="rest-seconds" class="form-text">Seconds</label>
+                </div>
+              </div>
+              
+              <!-- Round Count -->
+              <div class="mb-3 row">
+                <label for="round-count" class="col-sm-4 col-form-label">Number of Rounds:</label>
+                <div class="col-sm-8">
+                  <input type="number" id="round-count" class="form-control" min="1" max="20" value="12">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer d-flex justify-content-end gap-2">
+            <button id="apply-btn" class="btn btn-primary">Apply</button>
+            <button id="cancel-btn" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Optional: Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> 

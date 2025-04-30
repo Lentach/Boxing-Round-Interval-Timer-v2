@@ -1,0 +1,23 @@
+# Node
+node_modules/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+*.log
+
+# Cursor scratchpad and metadata
+.cursor/
+
+# Misc
+.env
+*.bak
+*.tmp 
