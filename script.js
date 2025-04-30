@@ -37,6 +37,25 @@ const settingsPanel = document.getElementById('settings-panel');
 const applyBtn = document.getElementById('apply-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 
+// Helper: sprawdź czy jesteśmy na desktopie
+function isDesktop() {
+  return window.matchMedia('(min-width: 769px)').matches;
+}
+
+function showSettingsPanel() {
+  settingsPanel.classList.add('settings-visible');
+  if (isDesktop()) {
+    settingsPanel.classList.remove('d-none');
+  }
+}
+
+function hideSettingsPanel() {
+  settingsPanel.classList.remove('settings-visible');
+  if (isDesktop()) {
+    settingsPanel.classList.add('d-none');
+  }
+}
+
 // Timer Functions
 function startTimer() {
   if (timerState === TIMER_STATES.PAUSED || timerState === TIMER_STATES.PREPARE) {
@@ -158,16 +177,18 @@ function formatTime(seconds) {
 // Settings Functions
 function toggleSettingsPanel() {
   // Update form values with current settings before showing
-  if (settingsPanel.classList.contains('d-none')) {
+  if (!settingsPanel.classList.contains('settings-visible')) {
     document.getElementById('round-minutes').value = Math.floor(roundTime / 60);
     document.getElementById('round-seconds').value = roundTime % 60;
     document.getElementById('rest-minutes').value = Math.floor(restTime / 60);
     document.getElementById('rest-seconds').value = restTime % 60;
     document.getElementById('round-count').value = totalRounds;
+    showSettingsPanel();
+    console.log('script.js: Settings panel shown');
+  } else {
+    hideSettingsPanel();
+    console.log('script.js: Settings panel hidden');
   }
-  
-  settingsPanel.classList.toggle('d-none');
-  console.log(`script.js: Settings panel ${settingsPanel.classList.contains('d-none') ? 'hidden' : 'shown'}`);
 }
 
 function applySettings() {
@@ -185,25 +206,18 @@ function applySettings() {
     alert('Please enter valid values for all fields.');
     return;
   }
-  
-  // Additional validation - ensure at least one setting has a non-zero value
   if (roundMinutes === 0 && roundSeconds === 0) {
     alert('Round time cannot be zero. Please enter a valid round time.');
     return;
   }
-  
   // Update settings
   roundTime = roundMinutes * 60 + roundSeconds;
   restTime = restMinutes * 60 + restSeconds;
   totalRounds = roundCount;
-  
   console.log(`script.js: Settings applied - Round time: ${formatTime(roundTime)}, Rest time: ${formatTime(restTime)}, Rounds: ${totalRounds}`);
-  
-  // Reset timer with new settings
   resetTimer();
-  
-  // Hide settings panel
-  toggleSettingsPanel();
+  // Hide settings panel (slide out)
+  hideSettingsPanel();
 }
 
 // Event Listeners
@@ -213,7 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
   resetBtn.addEventListener('click', resetTimer);
   settingsBtn.addEventListener('click', toggleSettingsPanel);
   applyBtn.addEventListener('click', applySettings);
-  cancelBtn.addEventListener('click', toggleSettingsPanel);
+  cancelBtn.addEventListener('click', hideSettingsPanel);
+  // Obsługa przycisku Zamknij (X)
+  const closeBtn = document.getElementById('close-settings-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', hideSettingsPanel);
+  }
   
   // Add button hover effects
   document.querySelectorAll('.btn').forEach(btn => {
@@ -229,4 +248,19 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDisplay();
   
   console.log('script.js: Boxing Round Interval Timer initialized successfully');
+});
+
+// Obsługa zmiany rozmiaru okna: jeśli panel jest otwarty i zmieniamy tryb mobile/desktop, popraw widoczność
+window.addEventListener('resize', () => {
+  if (settingsPanel.classList.contains('settings-visible')) {
+    if (isDesktop()) {
+      settingsPanel.classList.remove('d-none');
+    } else {
+      settingsPanel.classList.remove('d-none'); // na mobile panel zawsze widoczny (display: block)
+    }
+  } else {
+    if (isDesktop()) {
+      settingsPanel.classList.add('d-none');
+    }
+  }
 }); 

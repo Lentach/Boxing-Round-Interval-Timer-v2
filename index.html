@@ -41,22 +41,6 @@
       </div>
     </div>
     
-    <!-- Instructions (new section) -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-12 col-md-8 col-lg-6">
-        <div class="alert alert-secondary">
-          <h4>Instructions:</h4>
-          <ul>
-            <li><strong>Start:</strong> Begin the timer</li>
-            <li><strong>Stop:</strong> Pause the timer</li>
-            <li><strong>Reset:</strong> Reset to the beginning</li>
-            <li><strong>Settings:</strong> Configure round time, rest time, and number of rounds</li>
-          </ul>
-          <p class="small mb-0">Default settings: 3-minute rounds, 1-minute rest, 12 rounds total</p>
-        </div>
-      </div>
-    </div>
-    
     <!-- Animation Area -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-md-8 col-lg-6">
@@ -70,6 +54,7 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
         <div id="settings-panel" class="card shadow d-none">
+          <button id="close-settings-btn" type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"></button>
           <div class="card-header bg-info text-white">
             <h2 class="card-title mb-0">Settings</h2>
           </div>
@@ -117,6 +102,11 @@
         </div>
       </div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+      <p class="text-muted small">Boxing Round Interval Timer - Created with Bootstrap 5</p>
+    </footer>
   </div>
   
   <!-- Optional: Bootstrap JS Bundle with Popper -->
